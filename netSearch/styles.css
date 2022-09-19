@@ -1,0 +1,46 @@
+*{
+    background: #0B0B45;
+}
+
+input{
+    background: white;
+}
+
+.submit{
+    background: white;
+}
+
+#main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: pink;
+}
+
+label{
+    color: white;
+}
+
+/* div{
+    display:block;
+} */
+
+.info{
+    background: blue;
+    color: white;
+    justify-content: center;
+}
+
+.img{
+    padding-left: 40%;
+}
+
+.title{
+    padding-left: 40%;
+}
+
+.clist{
+    border-bottom: 1px dotted;
+    height: 70%;
+}
