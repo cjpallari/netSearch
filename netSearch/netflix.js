@@ -1,47 +1,48 @@
-/* import fetch from "node-fetch";
-global.globalThis.fetch = fetch; */
-fetch("https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi?t=loadvideo&q=60029591", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "unogs-unogs-v1.p.rapidapi.com",
-		"x-rapidapi-key": "71c46cfca3msh871766fb46dd494p1db561jsn62d60f12446b"
+let main = document.getElementById("main");
+
+document.querySelector(".submit").addEventListener("click", function(result) {
+let  title = document.querySelector("input").value;
+
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '',
+		'X-RapidAPI-Host': 'unogsng.p.rapidapi.com'
 	}
-})
-.then(response => {
-	console.log(response);
-	return response.json()
-})
+};
+
+fetch(`https://unogsng.p.rapidapi.com/search?query=${title}&offset=0`, options)
+.then(response => response.json())
 .then(data => {
-	let countries = [];
-	let fun = document.getElementById("submit").onclick = function(){
-		document.querySelector("form").addEventListener('submit', function(e) {
-			e.preventDefault();
-			let search = document.querySelector("input").value;
-			/* console.log(search);
-			for (var i = 0; i < data.RESULT.nfinfo.title.length; i++)
-			{
-				for (var key in data.RESULT.nfinfo.title[i])
-				{
-					if (data.RESULT.nfinfo.title[i][key].indexOf(search) != -1)
-					{
-						countries.push(data.country[i]);
-						console.log(countries);
-					}
-				}
-			} */
-			if (data.RESULT.nfinfo.title === search)
-			{
-				console.log(data.RESULT.nfinfo.title);
-			}
-			
-		})
-	};
-	/* console.log(data.RESULT.country);
-	console.log(data); */
-})
-.catch(err => {
-	console.error(err);
-});
+			console.log(data)
+			createCard(data.results);
+		}) 
+		.catch(err => console.error(err));
+	});
+
+function createCard(data){
+	main.innerHTML = '';
+	data.forEach(result => {
+		const {title, img, synopsis, clist} = result;
+		let div = document.createElement("div");
+		div.innerHTML = `
+        <div class="info">
+		<h3 class="title">
+			${title}
+		</h3>
+		<img class="img" src="${img}" alt="">
+            <div class="synop">
+                <p>${synopsis}</p>
+            </div>
+			<div class="clist">
+				<p>${clist}</p>
+			</div>
+        </div>
+		`
+		main.appendChild(div);
+	})
+}
 
 
 
